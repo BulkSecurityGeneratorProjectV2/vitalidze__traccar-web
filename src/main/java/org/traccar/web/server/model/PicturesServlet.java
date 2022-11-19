@@ -40,6 +40,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -78,7 +79,7 @@ public class PicturesServlet  extends HttpServlet {
         try {
             FileItemIterator fileItemIterator = servletFileUpload.getItemIterator(req);
             while (fileItemIterator.hasNext()) {
-                file = File.createTempFile("uploaded", ".image");
+                file = Files.createTempFile("uploaded", ".image").toFile();
                 file.deleteOnExit();
                 os = new BufferedOutputStream(new FileOutputStream(file));
                 FileItemStream next = fileItemIterator.next();
